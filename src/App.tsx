@@ -1,7 +1,7 @@
 import Main from "./components/main/Main";
 import { useState } from "react";
 import TaskBar from "./components/taskbar/TaskBar";
-import Boot from "./components/main/Boot";
+import Boot from "./Boot";
 
 export default function App() {
   const [isTaskBarButtonClicked, setIsTaskBarButtonClicked] = useState<
