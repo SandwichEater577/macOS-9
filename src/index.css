@@ -10,6 +10,7 @@
 
 @theme {
   --font-mac: "MacPixel", "Charcoal", "Geneva", sans-serif;
+  --animate-flicker: flicker 0.5s ease-in-out;
 }
 
 * {
@@ -34,4 +35,24 @@ div#root {
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+@keyframes flicker {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    background-color: #1d4ed8;
+    color: white;
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    background-color: transparent;
+    color: black;
+  }
 }
