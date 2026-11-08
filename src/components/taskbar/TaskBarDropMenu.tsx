@@ -1,16 +1,37 @@
+import { useEffect, useRef } from "react";
 import { taskBarMenus } from "../../Data/taskbarData";
 
 export default function TaskBarDropMenu({
   isTaskBarButtonClicked,
+  setIsTaskBarButtonClicked,
 }: {
   isTaskBarButtonClicked: string | null;
+  setIsTaskBarButtonClicked: (val: string | null) => void;
 }) {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsTaskBarButtonClicked(null);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [setIsTaskBarButtonClicked]);
+
   if (!isTaskBarButtonClicked) return null;
 
   const items = taskBarMenus[isTaskBarButtonClicked] || [];
 
   return (
-    <div className="absolute top-full left-0 w-auto select-none text-nowrap m-px bg-stone-200 border border-black border-r-2 border-b-2 z-50">
+    <div
+      ref={menuRef}
+      className="absolute top-full left-0 w-auto select-none text-nowrap m-px bg-stone-200 border border-black border-r-2 border-b-2 z-50"
+    >
       {items.map((item, index) => {
         const isNewSet = index > 0 && items[index - 1].set !== item.set;
 
