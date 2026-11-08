@@ -153,20 +153,22 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       shortcut: "⌘W",
       disabled: true,
     },
+
     {
       ActionID: 25,
       text: "Get Info",
       set: 2,
       hasSubmenu: true,
       pointActionID: 200,
-    }, // Fixed 150 -> 200
+    },
     {
       ActionID: 26,
       text: "Label",
       set: 2,
       hasSubmenu: true,
       pointActionID: 201,
-    }, // Fixed 151 -> 201
+    },
+
     { ActionID: 27, text: "Duplicate", set: 2, shortcut: "⌘D", disabled: true },
     {
       ActionID: 28,
@@ -178,6 +180,7 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 29, text: "Add To Favorites", set: 2, disabled: true },
     { ActionID: 30, text: "Put Away", set: 2, shortcut: "⌘Y", disabled: true },
     { ActionID: 31, text: "Encrypt", set: 2, disabled: true },
+
     { ActionID: 32, text: "Find...", set: 3, shortcut: "⌘F" },
     { ActionID: 33, text: "Search Internet...", set: 3, shortcut: "⌘H" },
     {
@@ -187,6 +190,7 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       shortcut: "⌘R",
       disabled: true,
     },
+
     { ActionID: 35, text: "Page Setup...", set: 4, disabled: true },
     { ActionID: 36, text: "Print Desktop...", set: 4, disabled: true },
   ],
@@ -204,8 +208,10 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 50, text: "as Icons", set: 1 },
     { ActionID: 51, text: "as Buttons", set: 1, checked: true },
     { ActionID: 52, text: "as List", set: 1, disabled: true },
+
     { ActionID: 53, text: "as Window", set: 2, disabled: true },
     { ActionID: 54, text: "as Pop-up Window", set: 2, disabled: true },
+
     { ActionID: 55, text: "Clean Up", set: 3 },
     {
       ActionID: 56,
@@ -213,7 +219,8 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       set: 3,
       hasSubmenu: true,
       pointActionID: 300,
-    }, // Fixed 250 -> 300
+    },
+
     { ActionID: 57, text: "Reset Column Positions", set: 3, disabled: true },
     { ActionID: 58, text: "View Options...", set: 4 },
   ],
@@ -229,6 +236,12 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 70, text: "Help Center", set: 1 },
     { ActionID: 71, text: "Show Balloons", set: 2 },
     { ActionID: 72, text: "Mac Help", set: 3, shortcut: "⌘?" },
+  ],
+  Finder: [
+    { ActionID: 80, text: "Hide Finder", set: 1, disabled: true },
+    { ActionID: 81, text: "Hide Others", set: 1, disabled: true },
+    { ActionID: 82, text: "Show All", set: 1, disabled: true },
+    { ActionID: 83, text: "Finder", set: 2, icon: FinderIcon, checked: true },
   ],
 };
 
