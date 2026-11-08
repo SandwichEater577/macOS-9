@@ -14,7 +14,7 @@ export type TaskBarItem = {
 
 export type TaskBarWindowsItem = {
   ActionID: number;
-  icon?: ElementType;
+  icon?: ElementType | string; // Zmienione, żeby przyjmowało ścieżki do PNG
   text: string;
   set: number;
   shortcut?: string;
@@ -102,14 +102,19 @@ export const rightTaskBarItems = (
 export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
   Apple: [
     { ActionID: 1, text: "About This Computer", set: 1 },
-    { ActionID: 2, text: "Apple System Profiler", set: 2, icon: FinderIcon },
-    { ActionID: 3, text: "Calculator", set: 2, icon: FinderIcon },
-    { ActionID: 4, text: "Chooser", set: 2, icon: FinderIcon },
+    {
+      ActionID: 2,
+      text: "Apple System Profiler",
+      set: 2,
+      icon: "/icons/png 64px/12.png",
+    },
+    { ActionID: 3, text: "Calculator", set: 2, icon: "/icons/png 64px/16.png" },
+    { ActionID: 4, text: "Chooser", set: 2, icon: "/icons/png 64px/14.png" },
     {
       ActionID: 5,
       text: "Control Panels",
       set: 2,
-      icon: FinderIcon,
+      icon: "/icons/png 64px/19.png",
       hasSubmenu: true,
       pointActionID: 100,
     },
@@ -117,23 +122,33 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       ActionID: 6,
       text: "Favorites",
       set: 2,
-      icon: FinderIcon,
+      icon: "/icons/png 64px/17.png",
       hasSubmenu: true,
       pointActionID: 101,
     },
-    { ActionID: 7, text: "Key Caps", set: 2, icon: FinderIcon },
-    { ActionID: 8, text: "Network Browser", set: 2, icon: FinderIcon },
+    { ActionID: 7, text: "Key Caps", set: 2, icon: "/icons/png 64px/72.png" },
+    {
+      ActionID: 8,
+      text: "Network Browser",
+      set: 2,
+      icon: "/icons/png 64px/81.png",
+    },
     {
       ActionID: 9,
       text: "Recent Applications",
       set: 2,
-      icon: FinderIcon,
+      icon: "/icons/png 64px/31.png",
       hasSubmenu: true,
       pointActionID: 102,
     },
-    { ActionID: 10, text: "Scrapbook", set: 2, icon: FinderIcon },
-    { ActionID: 11, text: "Sherlock 2", set: 2, icon: FinderIcon },
-    { ActionID: 12, text: "Stickies", set: 2, icon: FinderIcon },
+    { ActionID: 10, text: "Scrapbook", set: 2, icon: "/icons/png 64px/28.png" },
+    {
+      ActionID: 11,
+      text: "Sherlock 2",
+      set: 2,
+      icon: "/icons/png 64px/80.png",
+    },
+    { ActionID: 12, text: "Stickies", set: 2, icon: "/icons/png 64px/20.png" },
   ],
   File: [
     { ActionID: 20, text: "New Folder", set: 1, shortcut: "⌘N" },
@@ -153,7 +168,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       shortcut: "⌘W",
       disabled: true,
     },
-
     {
       ActionID: 25,
       text: "Get Info",
@@ -168,7 +182,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       hasSubmenu: true,
       pointActionID: 201,
     },
-
     { ActionID: 27, text: "Duplicate", set: 2, shortcut: "⌘D", disabled: true },
     {
       ActionID: 28,
@@ -180,7 +193,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 29, text: "Add To Favorites", set: 2, disabled: true },
     { ActionID: 30, text: "Put Away", set: 2, shortcut: "⌘Y", disabled: true },
     { ActionID: 31, text: "Encrypt", set: 2, disabled: true },
-
     { ActionID: 32, text: "Find...", set: 3, shortcut: "⌘F" },
     { ActionID: 33, text: "Search Internet...", set: 3, shortcut: "⌘H" },
     {
@@ -190,7 +202,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       shortcut: "⌘R",
       disabled: true,
     },
-
     { ActionID: 35, text: "Page Setup...", set: 4, disabled: true },
     { ActionID: 36, text: "Print Desktop...", set: 4, disabled: true },
   ],
@@ -208,10 +219,8 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 50, text: "as Icons", set: 1 },
     { ActionID: 51, text: "as Buttons", set: 1, checked: true },
     { ActionID: 52, text: "as List", set: 1, disabled: true },
-
     { ActionID: 53, text: "as Window", set: 2, disabled: true },
     { ActionID: 54, text: "as Pop-up Window", set: 2, disabled: true },
-
     { ActionID: 55, text: "Clean Up", set: 3 },
     {
       ActionID: 56,
@@ -220,7 +229,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       hasSubmenu: true,
       pointActionID: 300,
     },
-
     { ActionID: 57, text: "Reset Column Positions", set: 3, disabled: true },
     { ActionID: 58, text: "View Options...", set: 4 },
   ],
@@ -253,12 +261,32 @@ export const subMenus: Record<number, TaskBarWindowsItem[]> = {
     { ActionID: 113, text: "Monitors & Sound", set: 1 },
   ],
   101: [
-    { ActionID: 150, text: "Macintosh HD", set: 1 },
-    { ActionID: 151, text: "Apple Website", set: 1 },
+    {
+      ActionID: 150,
+      text: "Macintosh HD",
+      set: 1,
+      icon: "/icons/png 64px/1.png",
+    },
+    {
+      ActionID: 151,
+      text: "Apple Website",
+      set: 1,
+      icon: "/icons/png 64px/32.png",
+    },
   ],
   102: [
-    { ActionID: 200, text: "SimpleText", set: 1 },
-    { ActionID: 201, text: "Scrapbook", set: 1 },
+    {
+      ActionID: 200,
+      text: "SimpleText",
+      set: 1,
+      icon: "/icons/png 64px/11.png",
+    },
+    {
+      ActionID: 201,
+      text: "Scrapbook",
+      set: 1,
+      icon: "/icons/png 64px/28.png",
+    },
   ],
   200: [
     { ActionID: 250, text: "General Information", set: 1 },
