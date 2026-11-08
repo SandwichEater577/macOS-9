@@ -17,15 +17,26 @@ export default function TaskBarButton({
   showFinderText: boolean;
   setShowFinderText: (val: boolean) => void;
 }) {
+  if (element.name === "FinderToggle") {
+    return (
+      <button
+        onClick={() => setShowFinderText(!showFinderText)}
+        className="h-full px-0.5 flex flex-col items-center justify-center bg-stone-200 hover:bg-stone-300 active:bg-stone-400 border-l border-r border-stone-400 outline-none focus:outline-none focus:ring-0 cursor-default"
+      >
+        <div className="flex flex-col gap-0.5">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="w-1 h-px bg-stone-600" />
+          ))}
+        </div>
+      </button>
+    );
+  }
+
   return (
     <div className="relative h-full flex items-center">
       <button
         key={element.name}
         onClick={() => {
-          if (element.name === "FinderToggle") {
-            setShowFinderText(!showFinderText);
-            return;
-          }
           if (isTaskBarButtonClicked !== element.name) {
             if (element.name === "Time") {
               if (clockDisplayFormat === "time") {
@@ -40,7 +51,13 @@ export default function TaskBarButton({
             setIsTaskBarButtonClicked(null);
           }
         }}
-        className={`flex items-center gap-1 leading-none m-px px-1.5 py-0.5 ${isTaskBarButtonClicked === element.name ? (element.name === "Time" ? null : " bg-blue-700 text-white") : "bg-transparent text-black"}`}
+        className={`flex items-center gap-1 leading-none m-px px-1.5 py-0.5 outline-none focus:outline-none focus:ring-0 ${
+          isTaskBarButtonClicked === element.name
+            ? element.name === "Time"
+              ? null
+              : "bg-blue-700 text-white"
+            : "bg-transparent text-black"
+        }`}
       >
         {element.display === "both" ? (
           <>
@@ -63,7 +80,10 @@ export default function TaskBarButton({
       </button>
 
       {isTaskBarButtonClicked === element.name && (
-        <TaskBarDropMenu isTaskBarButtonClicked={isTaskBarButtonClicked} />
+        <TaskBarDropMenu
+          isTaskBarButtonClicked={isTaskBarButtonClicked}
+          setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
+        />
       )}
     </div>
   );
