@@ -80,13 +80,17 @@ export default function TaskBarDropMenu({
           ${isFlickering ? "animate-flicker" : ""}
         `}
       >
-        {/* Tight container for Check and Icon */}
         <div className="w-6 flex items-center justify-start shrink-0">
           {item.checked && <span>✔</span>}
-          {item.icon && <item.icon className="w-4 h-4" />}
+          {item.icon &&
+            (typeof item.icon === "string" ? (
+              <img src={item.icon} className="w-4 h-4 object-contain" alt="" />
+            ) : (
+              <item.icon className="w-4 h-4" />
+            ))}
         </div>
 
-        <div className="flex-1 text-left  min-w-32">
+        <div className="flex-1 text-left min-w-32">
           <span>{item.text}</span>
         </div>
 
