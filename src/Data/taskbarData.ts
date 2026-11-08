@@ -14,7 +14,7 @@ export type TaskBarItem = {
 
 export type TaskBarWindowsItem = {
   ActionID: number;
-  icon?: ElementType | string; // Zmienione, żeby przyjmowało ścieżki do PNG
+  icon?: ElementType | string;
   text: string;
   set: number;
   shortcut?: string;
@@ -23,6 +23,7 @@ export type TaskBarWindowsItem = {
   checked?: boolean;
   pointActionID?: number;
   openWindow?: number;
+  appId?: string;
 };
 
 export const leftTaskBarItems: TaskBarItem[] = [
@@ -101,12 +102,13 @@ export const rightTaskBarItems = (
 
 export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
   Apple: [
-    { ActionID: 1, text: "About This Computer", set: 1 },
+    { ActionID: 1, text: "About This Computer", set: 1, appId: "about" },
     {
       ActionID: 2,
       text: "Apple System Profiler",
       set: 2,
       icon: "/icons/png 64px/12.png",
+      appId: "profiler",
     },
     { ActionID: 3, text: "Calculator", set: 2, icon: "/icons/png 64px/16.png" },
     { ActionID: 4, text: "Chooser", set: 2, icon: "/icons/png 64px/14.png" },

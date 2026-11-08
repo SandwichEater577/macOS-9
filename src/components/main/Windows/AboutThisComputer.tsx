@@ -44,10 +44,10 @@ export default function AboutThisComputer() {
 
         <div className="flex gap-2">
           <span>Largest Unused Block:</span>
-          <span className="font-normal">222.4 MB</span>
+          <span className="font-normal">67.67 MB</span>
         </div>
         <div className="flex justify-end items-end font-normal text-[10px]">
-          ™ & © Apple Computer, Inc. 1983-1999
+          Ouro © 2026
         </div>
       </div>
 
@@ -55,7 +55,7 @@ export default function AboutThisComputer() {
         <div className="border-b border-black flex items-center p-1 gap-2">
           <FinderIcon className="w-4 h-4" />
           <span className="flex-1 text-xs">Mac OS</span>
-          <span className="text-xs w-16 text-right">32.2 MB</span>
+          <span className="text-xs w-16 text-right">67 TB</span>
           <div className="w-48 h-3.5 border border-black bg-stone-200 p-px">
             <div className="h-full w-full bg-blue-600 border border-black"></div>
           </div>
@@ -63,10 +63,10 @@ export default function AboutThisComputer() {
 
         <div className="border-b border-black flex items-center p-1 gap-2">
           <div className="w-4 h-4 bg-yellow-300 border border-black flex items-center justify-center text-[8px]">
-            S
+            F
           </div>
-          <span className="flex-1 text-xs">Stickies</span>
-          <span className="text-xs w-16 text-right">468 K</span>
+          <span className="flex-1 text-xs">Freakery</span>
+          <span className="text-xs w-16 text-right">67 B</span>
           <div className="w-48 h-3.5 border border-black bg-stone-200 p-px">
             <div className="h-full w-4 bg-blue-600 border border-black"></div>
           </div>

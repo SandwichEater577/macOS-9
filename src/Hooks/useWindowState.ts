@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 
 export function useWindowState() {
+  const [isShaded, setIsShaded] = useState(false);
   const [size, setSize] = useState({ width: 530, height: 320 });
   const [pos, setPos] = useState({ x: 80, y: 80 });
 
@@ -12,6 +13,17 @@ export function useWindowState() {
     startWidth: 0,
     startHeight: 0,
   });
+  const lastHeight = useRef(320);
+
+  const toggleShade = () => {
+    if (!isShaded) {
+      lastHeight.current = size.height;
+      setSize((prev) => ({ ...prev, height: 24 }));
+    } else {
+      setSize((prev) => ({ ...prev, height: lastHeight.current }));
+    }
+    setIsShaded(!isShaded);
+  };
 
   const handleDragPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest("button")) return;
@@ -86,6 +98,8 @@ export function useWindowState() {
   };
 
   return {
+    isShaded,
+    toggleShade,
     size,
     pos,
     windowRef,

@@ -5,9 +5,11 @@ import type { TaskBarWindowsItem } from "../../Data/taskbarData";
 export default function TaskBarDropMenu({
   isTaskBarButtonClicked,
   setIsTaskBarButtonClicked,
+  onOpenApp,
 }: {
   isTaskBarButtonClicked: string | null;
   setIsTaskBarButtonClicked: (val: string | null) => void;
+  onOpenApp: (appId: string) => void;
 }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
@@ -65,6 +67,10 @@ export default function TaskBarDropMenu({
     setTimeout(() => {
       setClickedItem(null);
       setIsTaskBarButtonClicked(null);
+
+      if (item.appId) {
+        onOpenApp(item.appId);
+      }
     }, 500);
   };
 
@@ -73,7 +79,7 @@ export default function TaskBarDropMenu({
 
     return (
       <div
-        onMouseDown={(e) => e.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
         onClick={() => handleClick(item)}
         className={`w-full flex items-center pl-1 pr-4 py-0.5 cursor-default
           ${item.disabled ? "text-gray-400" : "text-black hover:bg-blue-700 hover:text-white"}

@@ -2,54 +2,38 @@ export type WindowState = {
   id: string;
   title: string;
   isOpen: boolean;
-  isFullscreen: boolean;
-  isMinimized: boolean;
+  isShaded: boolean;
   x: number;
   y: number;
   z: number;
-  xsize: number;
-  ysize: number;
-  content: Record<string, any>;
+  width: number;
+  height: number;
+  lastHeight: number;
 };
 
-export const initialWindows: WindowState[] = [
-  {
+export const initialWindows: Record<string, WindowState> = {
+  about: {
     id: "about",
     title: "About This Computer",
-    isOpen: true,
-    isFullscreen: false,
-    isMinimized: false,
-    x: 100,
-    y: 100,
+    isOpen: false,
+    isShaded: false,
+    x: 80,
+    y: 80,
     z: 10,
-    xsize: 600,
-    ysize: 450,
-    content: {},
+    width: 530,
+    height: 320,
+    lastHeight: 320,
   },
-  {
-    id: "stickies",
-    title: "Stickies",
+  profiler: {
+    id: "profiler",
+    title: "Apple System Profiler",
     isOpen: false,
-    isFullscreen: false,
-    isMinimized: false,
-    x: 200,
-    y: 200,
-    z: 9,
-    xsize: 300,
-    ysize: 300,
-    content: {},
+    isShaded: false,
+    x: 120,
+    y: 120,
+    z: 10,
+    width: 650,
+    height: 450,
+    lastHeight: 450,
   },
-  {
-    id: "calculator",
-    title: "Calculator",
-    isOpen: false,
-    isFullscreen: false,
-    isMinimized: false,
-    x: 300,
-    y: 150,
-    z: 8,
-    xsize: 200,
-    ysize: 300,
-    content: {},
-  },
-];
+};

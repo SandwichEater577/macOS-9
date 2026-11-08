@@ -1,12 +1,37 @@
 import Window from "./Window";
 import AboutThisComputer from "./Windows/AboutThisComputer";
+import AppleSystemProfiler from "./Windows/AppleSystemProfiler";
+import type { WindowState } from "../../Data/windowsData";
 
-export default function Main() {
+export default function Main({
+  windows,
+  onUpdate,
+  onClose,
+  onFocus,
+}: {
+  windows: Record<string, WindowState>;
+  onUpdate: (id: string, updates: Partial<WindowState>) => void;
+  onClose: (id: string) => void;
+  onFocus: (id: string) => void;
+}) {
   return (
-    <div className="relative bg-indigo-400 h-full w-10/12 border rounded-xl rounded-t-none">
-      <Window title="About This Computer">
-        <AboutThisComputer />
-      </Window>
+    <div className="relative bg-indigo-400 h-full w-10/12 border rounded-xl rounded-t-none overflow-hidden">
+      {Object.values(windows).map((windowState) => {
+        if (!windowState.isOpen) return null;
+
+        return (
+          <Window
+            key={windowState.id}
+            data={windowState}
+            onUpdate={(updates) => onUpdate(windowState.id, updates)}
+            onClose={() => onClose(windowState.id)}
+            onFocus={() => onFocus(windowState.id)}
+          >
+            {windowState.id === "about" && <AboutThisComputer />}
+            {windowState.id === "profiler" && <AppleSystemProfiler />}
+          </Window>
+        );
+      })}
     </div>
   );
 }

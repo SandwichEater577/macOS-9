@@ -8,6 +8,7 @@ export default function TaskBarButton({
   setIsTaskBarButtonClicked,
   showFinderText,
   setShowFinderText,
+  onOpenApp,
 }: {
   clockDisplayFormat: "time" | "date";
   setClockDisplayFormat: (val: "time" | "date") => void;
@@ -16,6 +17,7 @@ export default function TaskBarButton({
   setIsTaskBarButtonClicked: any;
   showFinderText: boolean;
   setShowFinderText: (val: boolean) => void;
+  onOpenApp: (appId: string) => void;
 }) {
   if (element.name === "FinderToggle") {
     return (
@@ -24,8 +26,8 @@ export default function TaskBarButton({
         className="h-full px-0.5 flex flex-col items-center justify-center bg-stone-200 hover:bg-stone-300 active:bg-stone-400 border-l border-r border-stone-400 outline-none focus:outline-none focus:ring-0 cursor-default"
       >
         <div className="flex flex-col gap-0.5">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="w-1 h-px bg-stone-600" />
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} className="w-1 h-px bg-stone-600" />
           ))}
         </div>
       </button>
@@ -83,6 +85,7 @@ export default function TaskBarButton({
         <TaskBarDropMenu
           isTaskBarButtonClicked={isTaskBarButtonClicked}
           setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
+          onOpenApp={onOpenApp}
         />
       )}
     </div>

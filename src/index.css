@@ -56,3 +56,72 @@ div#root {
     color: black;
   }
 }
+/* Mac OS 9 Scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background-color: #e5e5e5;
+  border-left: 1px solid #000;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e5e5e5;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #888;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8b9cf2;
+  border: 1px solid #000;
+  box-shadow:
+    inset 1px 1px 0px #fff,
+    inset -1px -1px 0px #555;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="16" height="16"><path d="M1 2h6M1 4h6M1 6h6M1 8h6" stroke="%23333" stroke-width="1"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+::-webkit-scrollbar-button {
+  background-color: #e5e5e5;
+  border: 1px solid #000;
+  box-shadow:
+    inset 1px 1px 0px #fff,
+    inset -1px -1px 0px #888;
+  display: block;
+  height: 16px;
+  width: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Up Arrow */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M5 3 L9 7 L1 7 Z" fill="black"/></svg>');
+  background-size: 8px 8px;
+}
+
+/* Down Arrow */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M5 7 L1 3 L9 3 Z" fill="black"/></svg>');
+  background-size: 8px 8px;
+}
+
+/* Left Arrow */
+::-webkit-scrollbar-button:single-button:horizontal:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M3 5 L7 1 L7 9 Z" fill="black"/></svg>');
+  background-size: 8px 8px;
+}
+
+/* Right Arrow */
+::-webkit-scrollbar-button:single-button:horizontal:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M7 5 L3 1 L3 9 Z" fill="black"/></svg>');
+  background-size: 8px 8px;
+}
+
+/* Corner block */
+::-webkit-scrollbar-corner {
+  background-color: #e5e5e5;
+  border-left: 1px solid #000;
+  border-top: 1px solid #000;
+}
