@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import TaskBarButton from "./TaskBarButton";
 import TaskBarDropMenu from "./TaskBarDropMenu";
-import { leftTaskBarItems, rightTaskBarItems } from "../../Data/data.ts";
+import { leftTaskBarItems, rightTaskBarItems } from "../../Data/taskbarData.ts";
 
 export default function Taskbar({
   isTaskBarButtonClicked,
