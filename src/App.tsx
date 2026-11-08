@@ -1,14 +1,18 @@
 import Main from "./components/main/Main";
 import { useState } from "react";
 import TaskBar from "./components/taskbar/TaskBar";
+import Boot from "./components/main/Boot";
 
 export default function App() {
   const [isTaskBarButtonClicked, setIsTaskBarButtonClicked] = useState<
     string | null
   >(null);
+  const [atBoot, setAtBoot] = useState(true);
 
-  return (
-    <div className=" overflow-hidden p-1 flex flex-col items-center w-screen h-screen bg-black">
+  return atBoot ? (
+    <Boot setAtBoot={setAtBoot} />
+  ) : (
+    <div className="overflow-hidden flex flex-col items-center w-screen h-screen bg-black">
       <TaskBar
         isTaskBarButtonClicked={isTaskBarButtonClicked}
         setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
