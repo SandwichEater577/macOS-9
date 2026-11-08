@@ -12,9 +12,11 @@ export default function TaskBarDropMenu({
   const menuRef = useRef<HTMLDivElement>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
   const submenuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [clickedItem, setClickedItem] = useState<number | null>(null);
 
   useEffect(() => {
     setActiveSubmenu(null);
+    setClickedItem(null);
     if (submenuTimeoutRef.current) clearTimeout(submenuTimeoutRef.current);
   }, [isTaskBarButtonClicked]);
 
@@ -54,6 +56,48 @@ export default function TaskBarDropMenu({
     if (submenuTimeoutRef.current) clearTimeout(submenuTimeoutRef.current);
   };
 
+  const handleClick = (item: TaskBarWindowsItem) => {
+    if (item.disabled) return;
+    if (item.hasSubmenu) return;
+
+    setClickedItem(item.ActionID);
+
+    setTimeout(() => {
+      setClickedItem(null);
+      setIsTaskBarButtonClicked(null);
+    }, 500);
+  };
+
+  const renderItem = (item: TaskBarWindowsItem) => {
+    const isFlickering = clickedItem === item.ActionID;
+
+    return (
+      <div
+        onMouseDown={(e) => e.stopPropagation()}
+        onClick={() => handleClick(item)}
+        className={`w-full flex items-center pl-1 pr-4 py-0.5 cursor-default
+          ${item.disabled ? "text-gray-400" : "text-black hover:bg-blue-700 hover:text-white"}
+          ${isFlickering ? "animate-flicker" : ""}
+        `}
+      >
+        {/* Tight container for Check and Icon */}
+        <div className="w-6 flex items-center justify-start shrink-0">
+          {item.checked && <span>✔</span>}
+          {item.icon && <item.icon className="w-4 h-4" />}
+        </div>
+
+        <div className="flex-1 text-left  min-w-32">
+          <span>{item.text}</span>
+        </div>
+
+        <div className="flex items-center justify-end shrink-0">
+          {item.shortcut && <span>{item.shortcut}</span>}
+          {item.hasSubmenu && <span className="ml-4 ">▶</span>}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div
       ref={menuRef}
@@ -73,31 +117,7 @@ export default function TaskBarDropMenu({
             {isNewSet && <div className="h-px bg-gray-500" />}
             {isNewSet && <div className="h-px bg-gray-100" />}
 
-            <div
-              onMouseDown={(e) => e.stopPropagation()}
-              onClick={() => {
-                if (!item.hasSubmenu) {
-                  setIsTaskBarButtonClicked(null);
-                }
-              }}
-              className={`w-full flex items-center px-2 py-0.5 cursor-default
-                ${item.disabled ? "text-gray-400" : "text-black hover:bg-blue-700 hover:text-white"}
-              `}
-            >
-              <div className="flex items-center justify-start w-4 h-4 shrink-0">
-                {item.checked && <span>✔</span>}
-                {item.icon && <item.icon className="w-full h-full" />}
-              </div>
-
-              <div className="flex-1 text-left min-w-32">
-                <span>{item.text}</span>
-              </div>
-
-              <div className="flex items-center justify-end w-8 h-4 shrink-0">
-                {item.shortcut && <span>{item.shortcut}</span>}
-                {item.hasSubmenu && <span>▶</span>}
-              </div>
-            </div>
+            {renderItem(item)}
 
             {item.hasSubmenu &&
               item.pointActionID &&
@@ -122,35 +142,7 @@ export default function TaskBarDropMenu({
                           {isSubNewSet && <div className="h-px bg-gray-500" />}
                           {isSubNewSet && <div className="h-px bg-gray-100" />}
 
-                          <div
-                            onMouseDown={(e) => e.stopPropagation()}
-                            onClick={() => {
-                              if (!subItem.hasSubmenu) {
-                                setIsTaskBarButtonClicked(null);
-                              }
-                            }}
-                            className={`w-full flex items-center px-2 py-0.5 cursor-default
-                              ${subItem.disabled ? "text-gray-400" : "text-black hover:bg-blue-700 hover:text-white"}
-                            `}
-                          >
-                            <div className="flex items-center justify-start w-4 h-4 shrink-0">
-                              {subItem.checked && <span>✔</span>}
-                              {subItem.icon && (
-                                <subItem.icon className="w-full h-full" />
-                              )}
-                            </div>
-
-                            <div className="flex-1 text-left min-w-32">
-                              <span>{subItem.text}</span>
-                            </div>
-
-                            <div className="flex items-center justify-end w-8 h-4 shrink-0">
-                              {subItem.shortcut && (
-                                <span>{subItem.shortcut}</span>
-                              )}
-                              {subItem.hasSubmenu && <span>▶</span>}
-                            </div>
-                          </div>
+                          {renderItem(subItem)}
                         </div>
                       );
                     })}
