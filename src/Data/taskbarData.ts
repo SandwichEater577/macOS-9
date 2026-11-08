@@ -153,22 +153,20 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       shortcut: "⌘W",
       disabled: true,
     },
-
     {
       ActionID: 25,
       text: "Get Info",
       set: 2,
       hasSubmenu: true,
       pointActionID: 200,
-    },
+    }, // Fixed 150 -> 200
     {
       ActionID: 26,
       text: "Label",
       set: 2,
       hasSubmenu: true,
       pointActionID: 201,
-    },
-
+    }, // Fixed 151 -> 201
     { ActionID: 27, text: "Duplicate", set: 2, shortcut: "⌘D", disabled: true },
     {
       ActionID: 28,
@@ -180,7 +178,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 29, text: "Add To Favorites", set: 2, disabled: true },
     { ActionID: 30, text: "Put Away", set: 2, shortcut: "⌘Y", disabled: true },
     { ActionID: 31, text: "Encrypt", set: 2, disabled: true },
-
     { ActionID: 32, text: "Find...", set: 3, shortcut: "⌘F" },
     { ActionID: 33, text: "Search Internet...", set: 3, shortcut: "⌘H" },
     {
@@ -190,7 +187,6 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       shortcut: "⌘R",
       disabled: true,
     },
-
     { ActionID: 35, text: "Page Setup...", set: 4, disabled: true },
     { ActionID: 36, text: "Print Desktop...", set: 4, disabled: true },
   ],
@@ -208,10 +204,8 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
     { ActionID: 50, text: "as Icons", set: 1 },
     { ActionID: 51, text: "as Buttons", set: 1, checked: true },
     { ActionID: 52, text: "as List", set: 1, disabled: true },
-
     { ActionID: 53, text: "as Window", set: 2, disabled: true },
     { ActionID: 54, text: "as Pop-up Window", set: 2, disabled: true },
-
     { ActionID: 55, text: "Clean Up", set: 3 },
     {
       ActionID: 56,
@@ -219,8 +213,7 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       set: 3,
       hasSubmenu: true,
       pointActionID: 300,
-    },
-
+    }, // Fixed 250 -> 300
     { ActionID: 57, text: "Reset Column Positions", set: 3, disabled: true },
     { ActionID: 58, text: "View Options...", set: 4 },
   ],
@@ -247,26 +240,26 @@ export const subMenus: Record<number, TaskBarWindowsItem[]> = {
     { ActionID: 113, text: "Monitors & Sound", set: 1 },
   ],
   101: [
-    { ActionID: 120, text: "Macintosh HD", set: 1 },
-    { ActionID: 121, text: "Apple Website", set: 1 },
+    { ActionID: 150, text: "Macintosh HD", set: 1 },
+    { ActionID: 151, text: "Apple Website", set: 1 },
   ],
   102: [
-    { ActionID: 130, text: "SimpleText", set: 1 },
-    { ActionID: 131, text: "Scrapbook", set: 1 },
+    { ActionID: 200, text: "SimpleText", set: 1 },
+    { ActionID: 201, text: "Scrapbook", set: 1 },
   ],
   200: [
-    { ActionID: 210, text: "General Information", set: 1 },
-    { ActionID: 211, text: "Memory", set: 1 },
+    { ActionID: 250, text: "General Information", set: 1 },
+    { ActionID: 251, text: "Memory", set: 1 },
   ],
   201: [
-    { ActionID: 220, text: "None", set: 1 },
-    { ActionID: 221, text: "Essential", set: 1 },
-    { ActionID: 222, text: "Hot", set: 1 },
-    { ActionID: 223, text: "In Progress", set: 1 },
+    { ActionID: 300, text: "None", set: 1 },
+    { ActionID: 301, text: "Essential", set: 1 },
+    { ActionID: 302, text: "Hot", set: 1 },
+    { ActionID: 303, text: "In Progress", set: 1 },
   ],
   300: [
-    { ActionID: 310, text: "by Name", set: 1 },
-    { ActionID: 311, text: "by Date", set: 1 },
-    { ActionID: 312, text: "by Size", set: 1 },
+    { ActionID: 350, text: "by Name", set: 1 },
+    { ActionID: 351, text: "by Date", set: 1 },
+    { ActionID: 352, text: "by Size", set: 1 },
   ],
 };
