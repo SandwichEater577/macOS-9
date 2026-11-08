@@ -92,7 +92,10 @@ export default function Taskbar({
           })}
         </div>
       </div>
-      <TaskBarDropMenu isTaskBarButtonClicked={isTaskBarButtonClicked} />
+      <TaskBarDropMenu
+        isTaskBarButtonClicked={isTaskBarButtonClicked}
+        setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
+      />
     </>
   );
 }
