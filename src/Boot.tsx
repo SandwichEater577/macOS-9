@@ -9,50 +9,32 @@ export default function Boot({
   const [loading, setLoading] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(30);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(80);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(90);
-    }, 3700);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(99);
-    }, 3900);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(100);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (loading === 100) {
-      setAtBoot(false);
+    if (loading >= 100) {
+      const timer = setTimeout(() => {
+        setAtBoot(false);
+      }, 800);
+      return () => clearTimeout(timer);
     }
+
+    const increment = Math.floor(Math.random() * 3) + 1;
+
+    let delay = Math.random() * 50 + 30;
+
+    if (Math.random() > 0.9) {
+      delay += 300 + Math.random() * 300;
+    }
+
+    const timer = setTimeout(() => {
+      setLoading((prev) => Math.min(prev + increment, 100));
+    }, delay);
+
+    return () => clearTimeout(timer);
   }, [loading, setAtBoot]);
 
   return (
     <div className="w-screen h-screen bg-black overflow-hidden relative flex flex-col items-center justify-center">
       <div
-        className={`rounded-xl relative overflow-hidden p-1 flex flex-col w-10/12 h-screen ${loading > 30 ? "bg-indigo-400" : "bg-stone-300"} select-none`}
+        className={`rounded-xl relative overflow-hidden p-1 flex flex-col w-10/12 h-screen ${loading > 5 ? "bg-indigo-400" : "bg-stone-300"} select-none`}
       >
         <div className="outline-3 border-2 border-b-stone-500 border-r-stone-500 border-l-stone-100 border-t-stone-100 absolute top-3/7 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/5 h-5/8 bg-stone-300">
           <div className="flex flex-col gap-10 items-center justify-center border-3 w-6/8 h-5/7 absolute top-3/7 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-stone-100">
@@ -66,7 +48,7 @@ export default function Boot({
               </h1>
             </div>
           </div>
-          {loading < 30 ? (
+          {loading < 5 ? (
             <p className="absolute bottom-[11%] w-full text-center text-sm font-bold">
               Welcome to React Mac OS 9
             </p>
