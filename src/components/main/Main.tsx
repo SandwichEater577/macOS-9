@@ -1,5 +1,5 @@
 import Window from "./Window";
-import Desktop from "./Desktop.tsx"; // <-- Dodany import
+import Desktop from "./Desktop.tsx";
 import AboutThisComputer from "./Windows/AboutThisComputer";
 import AppleSystemProfiler from "./Windows/AppleSystemProfiler";
 import Calculator from "./Windows/Calculator";
