@@ -1,6 +1,7 @@
 import Window from "./Window";
 import AboutThisComputer from "./Windows/AboutThisComputer";
 import AppleSystemProfiler from "./Windows/AppleSystemProfiler";
+import Calculator from "./Windows/Calculator";
 import type { WindowState } from "../../Data/windowsData";
 
 export default function Main({
@@ -31,6 +32,7 @@ export default function Main({
             {windowState.id === "profiler" && (
               <AppleSystemProfiler content={windowState.content} />
             )}
+            {windowState.id === "calculator" && <Calculator />}
           </Window>
         );
       })}
