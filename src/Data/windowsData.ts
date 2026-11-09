@@ -9,6 +9,8 @@ export type WindowState = {
   width: number;
   height: number;
   lastHeight: number;
+  minWidth: number;
+  minHeight: number;
   content: any;
 };
 
@@ -24,6 +26,8 @@ export const initialWindows: Record<string, WindowState> = {
     width: 530,
     height: 320,
     lastHeight: 320,
+    minWidth: 530,
+    minHeight: 320,
     content: {},
   },
   profiler: {
@@ -37,6 +41,8 @@ export const initialWindows: Record<string, WindowState> = {
     width: 750,
     height: 550,
     lastHeight: 550,
+    minWidth: 650,
+    minHeight: 400,
     content: {
       tabs: [
         "System Profile",
@@ -212,5 +218,20 @@ export const initialWindows: Record<string, WindowState> = {
         },
       ],
     },
+  },
+  calculator: {
+    id: "calculator",
+    title: "Calculator",
+    isOpen: false,
+    isShaded: false,
+    x: 200,
+    y: 150,
+    z: 10,
+    width: 240,
+    height: 340,
+    lastHeight: 340,
+    minWidth: 220,
+    minHeight: 300,
+    content: {},
   },
 };
