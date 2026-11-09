@@ -1,4 +1,5 @@
 import Window from "./Window";
+import Desktop from "./Desktop.tsx"; // <-- Dodany import
 import AboutThisComputer from "./Windows/AboutThisComputer";
 import AppleSystemProfiler from "./Windows/AppleSystemProfiler";
 import Calculator from "./Windows/Calculator";
@@ -17,6 +18,7 @@ export default function Main({
 }) {
   return (
     <div className="relative bg-indigo-400 h-full w-10/12 border rounded-xl rounded-t-none overflow-hidden">
+      <Desktop />
       {Object.values(windows).map((windowState) => {
         if (!windowState.isOpen) return null;
 
