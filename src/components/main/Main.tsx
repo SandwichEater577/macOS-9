@@ -28,7 +28,9 @@ export default function Main({
             onFocus={() => onFocus(windowState.id)}
           >
             {windowState.id === "about" && <AboutThisComputer />}
-            {windowState.id === "profiler" && <AppleSystemProfiler />}
+            {windowState.id === "profiler" && (
+              <AppleSystemProfiler content={windowState.content} />
+            )}
           </Window>
         );
       })}
