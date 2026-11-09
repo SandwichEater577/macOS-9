@@ -37,6 +37,7 @@ export default function Window({
 
   const handleDragPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest("button")) return;
+    event.stopPropagation();
     onFocus();
     event.currentTarget.setPointerCapture(event.pointerId);
     dragRef.current = {
@@ -51,13 +52,17 @@ export default function Window({
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
     const deltaX = event.clientX - dragRef.current.startX;
     const deltaY = event.clientY - dragRef.current.startY;
+
     let newX = dragRef.current.startPosX + deltaX;
     let newY = dragRef.current.startPosY + deltaY;
+
     const parent = windowRef.current?.parentElement;
     if (parent) {
       const parentRect = parent.getBoundingClientRect();
-      newX = Math.max(0, Math.min(newX, parentRect.width - data.width));
-      newY = Math.max(0, Math.min(newY, parentRect.height - data.height));
+      const maxRight = Math.max(0, parentRect.width - data.width);
+      const maxBottom = Math.max(0, parentRect.height - data.height);
+      newX = Math.max(0, Math.min(newX, maxRight));
+      newY = Math.max(0, Math.min(newY, maxBottom));
     }
     onUpdate({ x: newX, y: newY });
   };
@@ -86,8 +91,13 @@ export default function Window({
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
     const deltaX = event.clientX - resizeRef.current.startX;
     const deltaY = event.clientY - resizeRef.current.startY;
-    let newWidth = Math.max(530, resizeRef.current.startWidth + deltaX);
-    let newHeight = Math.max(320, resizeRef.current.startHeight + deltaY);
+
+    const minW = data.minWidth || 200;
+    const minH = data.minHeight || 150;
+
+    let newWidth = Math.max(minW, resizeRef.current.startWidth + deltaX);
+    let newHeight = Math.max(minH, resizeRef.current.startHeight + deltaY);
+
     const parent = windowRef.current?.parentElement;
     if (parent) {
       const parentRect = parent.getBoundingClientRect();
@@ -118,16 +128,17 @@ export default function Window({
         onPointerDown={handleDragPointerDown}
         onPointerMove={handleDragPointerMove}
         onPointerUp={handleDragPointerUp}
-        className="h-6 bg-[#e5e5e5] border-b-2 border-black flex items-center justify-between px-1 shrink-0 cursor-default touch-none"
+        className="h-6 bg-[#e5e5e5] border-b-2 border-black flex items-center justify-between px-1 shrink-0 cursor-default touch-none z-10"
       >
         <button
           onPointerDown={(event) => event.stopPropagation()}
           onClick={onClose}
           className="relative w-3 h-3 outline-2 outline-black border border-white border-b-[#888] border-r-[#888] bg-[#e5e5e5] active:bg-gray-300"
         >
-          <div className="h-px w-2 absolute top-5/11 left-5/11 transform rotate-45 -translate-x-1/2 -translate-y-1/2 bg-black"></div>
-          <div className="h-px w-2 absolute top-5/11 left-5/11 transform -rotate-45 -translate-x-1/2 -translate-y-1/2 bg-black"></div>
+          <div className="h-px w-2 absolute top-1/2 left-1/2 transform rotate-45 -translate-x-1/2 -translate-y-1/2 bg-black"></div>
+          <div className="h-px w-2 absolute top-1/2 left-1/2 transform -rotate-45 -translate-x-1/2 -translate-y-1/2 bg-black"></div>
         </button>
+
         <div className="flex flex-col gap-px ml-2 flex-1">
           {[...Array(6)].map((_, index) => (
             <div
@@ -136,9 +147,11 @@ export default function Window({
             />
           ))}
         </div>
+
         <div className="px-2 font-bold text-[13px] leading-none whitespace-nowrap">
           {data.title}
         </div>
+
         <div className="flex flex-col gap-px mr-2 flex-1">
           {[...Array(6)].map((_, index) => (
             <div
@@ -147,15 +160,16 @@ export default function Window({
             />
           ))}
         </div>
+
         <div className="flex gap-1">
           <button
             onPointerDown={(event) => event.stopPropagation()}
             onClick={toggleShade}
-            className="relative flex flex-col items-center justify-center w-3 h-3 outline-2 outline-black border border-white border-b-[#888] border-r-[#888] bg-[#e5e5e5] active:bg-gray-300"
+            className="w-3 h-3 relative outline-2 outline-black border border-white border-b-[#888] border-r-[#888] bg-[#e5e5e5] active:bg-gray-300"
           >
-            <div className="h-0.5 w-6/8 absolute top-4/8 left-4/8 transform -translate-x-1/2 -translate-y-1/2 bg-black"></div>
+            <div className="h-px w-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black"></div>
             {data.isShaded && (
-              <div className="h-6/8 w-0.5 absolute top-4/8 left-4/8 transform -translate-x-1/2 -translate-y-1/2 bg-black"></div>
+              <div className="h-px w-2 absolute top-1/2 left-1/2 transform rotate-90 -translate-x-1/2 -translate-y-1/2 bg-black"></div>
             )}
           </button>
         </div>
@@ -169,7 +183,7 @@ export default function Window({
             onPointerDown={handleResizePointerDown}
             onPointerMove={handleResizePointerMove}
             onPointerUp={handleResizePointerUp}
-            className="absolute bottom-0 right-0 w-4 h-4 bg-[#e5e5e5] border-t-2 border-l-2 border-black cursor-nwse-resize flex items-center justify-center touch-none"
+            className="absolute bottom-0 right-0 w-4 h-4 bg-[#e5e5e5] border-t-2 border-l-2 border-black cursor-nwse-resize flex items-center justify-center touch-none z-50"
           >
             <div className="w-2.5 h-2.5 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,#888_2px,#888_3px)]" />
           </div>
