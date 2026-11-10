@@ -43,7 +43,7 @@ export default function AppleSystemProfiler({ content }: { content: any }) {
 
         {activeTab !== "System Profile" && (
           <div className="flex-1 flex items-center justify-center">
-            <ErrorDialog message={`Couldn't Find the Server "${activeTab}"`} />
+            <ErrorDialog>Couldn't Find the Server "{activeTab}"</ErrorDialog>
           </div>
         )}
       </div>
