@@ -15,7 +15,7 @@ export default function Chooser() {
             className="flex flex-col items-center justify-center gap-1 w-16 cursor-default"
           >
             <img
-              src="/icons/png64px/81.png"
+              src="/icon-assets/png64px/81.png"
               alt="AppleShare"
               className="w-10 h-10"
             />
