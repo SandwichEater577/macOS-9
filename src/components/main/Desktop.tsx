@@ -42,7 +42,7 @@ export default function Desktop() {
       {size.width > 0 && size.height > 0 && (
         <div className="pointer-events-auto w-full h-full relative overflow-hidden">
           <DesktopIcon
-            iconPath="/icons/png64px/34.png"
+            iconPath="/icon-assets/png64px/34.png"
             label="Folder"
             initialX={PADDING}
             initialY={PADDING}
@@ -53,7 +53,7 @@ export default function Desktop() {
           />
 
           <DesktopIcon
-            iconPath="/icons/png64px/1.png"
+            iconPath="/icon-assets/png64px/1.png"
             label="Macintosh HD"
             initialX={getSnappedRight(size.width)}
             initialY={PADDING}
@@ -64,7 +64,7 @@ export default function Desktop() {
           />
 
           <DesktopIcon
-            iconPath="/icons/png64px/7.png"
+            iconPath="/icon-assets/png64px/7.png"
             label="Trash"
             initialX={getSnappedRight(size.width)}
             initialY={getSnappedBottom(size.height)}
