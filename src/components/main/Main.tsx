@@ -3,6 +3,7 @@ import Desktop from "./Desktop.tsx";
 import AboutThisComputer from "./Windows/AboutThisComputer";
 import AppleSystemProfiler from "./Windows/AppleSystemProfiler";
 import Calculator from "./Windows/Calculator";
+import Chooser from "./Windows/Chooser";
 import type { WindowState } from "../../Data/windowsData";
 
 export default function Main({
@@ -35,6 +36,7 @@ export default function Main({
               <AppleSystemProfiler content={windowState.content} />
             )}
             {windowState.id === "calculator" && <Calculator />}
+            {windowState.id === "chooser" && <Chooser />}
           </Window>
         );
       })}
