@@ -117,7 +117,13 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       icon: "/icons/png64px/16.png",
       appId: "calculator",
     },
-    { ActionID: 4, text: "Chooser", set: 2, icon: "/icons/png64px/14.png" },
+    {
+      ActionID: 4,
+      text: "Chooser",
+      set: 2,
+      icon: "/icons/png64px/14.png",
+      appId: "chooser",
+    },
     {
       ActionID: 5,
       text: "Control Panels",
