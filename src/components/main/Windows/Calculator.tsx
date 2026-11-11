@@ -2,64 +2,92 @@ import { useState } from "react";
 
 export default function Calculator() {
   const [display, setDisplay] = useState("0");
-  const [equation, setEquation] = useState("");
-  const [prevValue, setPrevValue] = useState<number | null>(null);
+  const [previousValue, setPreviousValue] = useState<number | null>(null);
   const [operator, setOperator] = useState<string | null>(null);
-  const [waiting, setWaiting] = useState(false);
+  const [isWaitingForOperand, setIsWaitingForOperand] = useState(false);
+
+  const calculate = (
+    firstOperand: number,
+    secondOperand: number,
+    operation: string,
+  ) => {
+    let result = 0;
+    if (operation === "+") result = firstOperand + secondOperand;
+    if (operation === "-") result = firstOperand - secondOperand;
+    if (operation === "*") result = firstOperand * secondOperand;
+    if (operation === "/") {
+      result = secondOperand === 0 ? NaN : firstOperand / secondOperand;
+    }
+    return result;
+  };
+
+  const formatResult = (value: number) =>
+    Number.isFinite(value) ? String(parseFloat(value.toFixed(10))) : "Error";
 
   const handleDigit = (digit: string) => {
-    if (waiting) {
+    if (isWaitingForOperand || display === "Error") {
       setDisplay(digit);
-      setWaiting(false);
+      setIsWaitingForOperand(false);
     } else {
       setDisplay(display === "0" ? digit : display + digit);
     }
   };
 
-  const handleDot = () => {
-    if (waiting) {
+  const handleDecimalPoint = () => {
+    if (isWaitingForOperand || display === "Error") {
       setDisplay("0.");
-      setWaiting(false);
+      setIsWaitingForOperand(false);
     } else if (!display.includes(".")) {
       setDisplay(display + ".");
     }
   };
 
-  const handleOp = (operation: string) => {
-    const val = parseFloat(display);
-    setEquation(`${display} ${operation}`);
-    setPrevValue(val);
-    setOperator(operation);
-    setWaiting(true);
+  const handleOperator = (nextOperator: string) => {
+    if (display === "Error") return;
+    const currentValue = parseFloat(display);
+
+    if (isWaitingForOperand && operator) {
+      setOperator(nextOperator);
+      return;
+    }
+
+    if (previousValue !== null && operator) {
+      const result = calculate(previousValue, currentValue, operator);
+      setDisplay(formatResult(result));
+      setPreviousValue(Number.isFinite(result) ? result : null);
+
+      if (!Number.isFinite(result)) {
+        setOperator(null);
+        setIsWaitingForOperand(true);
+        return;
+      }
+    } else {
+      setPreviousValue(currentValue);
+    }
+
+    setOperator(nextOperator);
+    setIsWaitingForOperand(true);
   };
 
   const handleEquals = () => {
-    if (prevValue !== null && operator) {
-      const val = parseFloat(display);
-      let result = 0;
-      if (operator === "+") result = prevValue + val;
-      if (operator === "-") result = prevValue - val;
-      if (operator === "*") result = prevValue * val;
-      if (operator === "/") result = prevValue / val;
+    if (previousValue === null || !operator || isWaitingForOperand) return;
 
-      setDisplay(String(result));
-      setPrevValue(result);
-      setOperator(null);
-      setEquation("");
-      setWaiting(true);
-    }
+    const result = calculate(previousValue, parseFloat(display), operator);
+    setDisplay(formatResult(result));
+    setPreviousValue(null);
+    setOperator(null);
+    setIsWaitingForOperand(true);
   };
 
   const handleClear = () => {
     setDisplay("0");
-    setPrevValue(null);
+    setPreviousValue(null);
     setOperator(null);
-    setEquation("");
-    setWaiting(false);
+    setIsWaitingForOperand(false);
   };
 
-  const btnClass =
-    "flex items-center justify-center border-2 border-black bg-stone-200 shadow-[inset_1.5px_1.5px_0px_#fff,inset_-1.5px_-1.5px_0px_#888] active:shadow-[inset_1.5px_1.5px_0px_#888,inset_-1.5px_-1.5px_0px_#fff] text-sm font-bold font-mono";
+  const buttonClass =
+    "flex items-center justify-center border-2 border-black bg-stone-200 text-sm font-bold font-mono";
 
   return (
     <div
@@ -70,73 +98,67 @@ export default function Calculator() {
         backgroundSize: "3px 3px",
       }}
     >
-      <div className="bg-white border-2 border-black h-10 flex flex-col items-end justify-center px-2 text-lg font-bold font-mono shadow-[inset_2px_2px_0px_#888] mb-1">
-        <span className="text-[10px] text-gray-500 h-3 leading-none">
-          {equation}
-        </span>
+      <div className="bg-white border-2 border-black h-10 flex flex-col items-end justify-center px-2 text-lg font-bold font-mono mb-1">
         <span>{display}</span>
       </div>
 
       <div className="grid grid-cols-4 grid-rows-5 gap-1.5 flex-1">
-        <button onClick={handleClear} className={btnClass}>
+        <button onClick={handleClear} className={`${buttonClass} col-span-2`}>
           C
         </button>
-        <button onClick={handleEquals} className={btnClass}>
-          =
-        </button>
-        <button onClick={() => handleOp("/")} className={btnClass}>
+        <button onClick={() => handleOperator("/")} className={buttonClass}>
           /
         </button>
-        <button onClick={() => handleOp("*")} className={btnClass}>
+        <button onClick={() => handleOperator("*")} className={buttonClass}>
           *
         </button>
 
-        <button onClick={() => handleDigit("7")} className={btnClass}>
+        <button onClick={() => handleDigit("7")} className={buttonClass}>
           7
         </button>
-        <button onClick={() => handleDigit("8")} className={btnClass}>
+        <button onClick={() => handleDigit("8")} className={buttonClass}>
           8
         </button>
-        <button onClick={() => handleDigit("9")} className={btnClass}>
+        <button onClick={() => handleDigit("9")} className={buttonClass}>
           9
         </button>
-        <button onClick={() => handleOp("-")} className={btnClass}>
+        <button onClick={() => handleOperator("-")} className={buttonClass}>
           -
         </button>
 
-        <button onClick={() => handleDigit("4")} className={btnClass}>
+        <button onClick={() => handleDigit("4")} className={buttonClass}>
           4
         </button>
-        <button onClick={() => handleDigit("5")} className={btnClass}>
+        <button onClick={() => handleDigit("5")} className={buttonClass}>
           5
         </button>
-        <button onClick={() => handleDigit("6")} className={btnClass}>
+        <button onClick={() => handleDigit("6")} className={buttonClass}>
           6
         </button>
-        <button onClick={() => handleOp("+")} className={btnClass}>
+        <button onClick={() => handleOperator("+")} className={buttonClass}>
           +
         </button>
 
-        <button onClick={() => handleDigit("1")} className={btnClass}>
+        <button onClick={() => handleDigit("1")} className={buttonClass}>
           1
         </button>
-        <button onClick={() => handleDigit("2")} className={btnClass}>
+        <button onClick={() => handleDigit("2")} className={buttonClass}>
           2
         </button>
-        <button onClick={() => handleDigit("3")} className={btnClass}>
+        <button onClick={() => handleDigit("3")} className={buttonClass}>
           3
         </button>
-        <button onClick={handleEquals} className={`${btnClass} row-span-2`}>
+        <button onClick={handleEquals} className={`${buttonClass} row-span-2`}>
           =
         </button>
 
         <button
           onClick={() => handleDigit("0")}
-          className={`${btnClass} col-span-2`}
+          className={`${buttonClass} col-span-2`}
         >
           0
         </button>
-        <button onClick={handleDot} className={btnClass}>
+        <button onClick={handleDecimalPoint} className={buttonClass}>
           .
         </button>
       </div>
