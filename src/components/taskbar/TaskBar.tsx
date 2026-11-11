@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TaskBarButton from "./TaskBarButton";
-import { leftTaskBarItems, rightTaskBarItems } from "../../Data/taskbarData.ts";
+import { leftTaskBarItems, rightTaskBarItems } from "../../Data/taskbarData";
 
 export default function Taskbar({
   isTaskBarButtonClicked,
@@ -15,7 +15,6 @@ export default function Taskbar({
     "time",
   );
   const [showFinderText, setShowFinderText] = useState(true);
-
   const [time, setTime] = useState(
     new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
   );
@@ -57,39 +56,35 @@ export default function Taskbar({
   return (
     <div className="select-none rounded-xl rounded-b-none w-10/12 h-auto flex flex-row bg-stone-200 border border-solid border-black font-bold">
       <div className="pl-4 flex flex-row gap-2 font-weight-inherit">
-        {leftTaskBarItems.map((element) => {
-          return (
-            <TaskBarButton
-              key={element.name}
-              clockDisplayFormat={clockDisplayFormat}
-              setClockDisplayFormat={setClockDisplayFormat}
-              isTaskBarButtonClicked={isTaskBarButtonClicked}
-              setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
-              showFinderText={showFinderText}
-              setShowFinderText={setShowFinderText}
-              element={element}
-              onOpenApp={onOpenApp}
-            />
-          );
-        })}
+        {leftTaskBarItems.map((element) => (
+          <TaskBarButton
+            key={element.name}
+            clockDisplayFormat={clockDisplayFormat}
+            setClockDisplayFormat={setClockDisplayFormat}
+            isTaskBarButtonClicked={isTaskBarButtonClicked}
+            setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
+            showFinderText={showFinderText}
+            setShowFinderText={setShowFinderText}
+            element={element}
+            onOpenApp={onOpenApp}
+          />
+        ))}
       </div>
 
       <div className="pr-4 flex flex-row gap-2 font-weight-inherit items-start ml-auto">
-        {rightItems.map((element) => {
-          return (
-            <TaskBarButton
-              key={element.name}
-              clockDisplayFormat={clockDisplayFormat}
-              setClockDisplayFormat={setClockDisplayFormat}
-              isTaskBarButtonClicked={isTaskBarButtonClicked}
-              setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
-              showFinderText={showFinderText}
-              setShowFinderText={setShowFinderText}
-              element={element}
-              onOpenApp={onOpenApp}
-            />
-          );
-        })}
+        {rightItems.map((element) => (
+          <TaskBarButton
+            key={element.name}
+            clockDisplayFormat={clockDisplayFormat}
+            setClockDisplayFormat={setClockDisplayFormat}
+            isTaskBarButtonClicked={isTaskBarButtonClicked}
+            setIsTaskBarButtonClicked={setIsTaskBarButtonClicked}
+            showFinderText={showFinderText}
+            setShowFinderText={setShowFinderText}
+            element={element}
+            onOpenApp={onOpenApp}
+          />
+        ))}
       </div>
     </div>
   );
