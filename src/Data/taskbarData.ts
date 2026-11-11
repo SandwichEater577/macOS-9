@@ -140,7 +140,12 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       hasSubmenu: true,
       pointActionID: 101,
     },
-    { ActionID: 7, text: "Key Caps", set: 2, icon: "/icon-assets/png64px/72.png" },
+    {
+      ActionID: 7,
+      text: "Key Caps",
+      set: 2,
+      icon: "/icon-assets/png64px/72.png",
+    },
     {
       ActionID: 8,
       text: "Network Browser",
@@ -155,14 +160,24 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
       hasSubmenu: true,
       pointActionID: 102,
     },
-    { ActionID: 10, text: "Scrapbook", set: 2, icon: "/icon-assets/png64px/28.png" },
+    {
+      ActionID: 10,
+      text: "Scrapbook",
+      set: 2,
+      icon: "/icon-assets/png64px/28.png",
+    },
     {
       ActionID: 11,
       text: "Sherlock 2",
       set: 2,
       icon: "/icon-assets/png64px/80.png",
     },
-    { ActionID: 12, text: "Stickies", set: 2, icon: "/icon-assets/png64px/20.png" },
+    {
+      ActionID: 12,
+      text: "Stickies",
+      set: 2,
+      icon: "/icon-assets/png64px/20.png",
+    },
   ],
   File: [
     { ActionID: 20, text: "New Folder", set: 1, shortcut: "⌘N" },
@@ -269,7 +284,7 @@ export const taskBarMenus: Record<string, TaskBarWindowsItem[]> = {
 
 export const subMenus: Record<number, TaskBarWindowsItem[]> = {
   100: [
-    { ActionID: 110, text: "Appearance", set: 1 },
+    { ActionID: 110, text: "Appearance", set: 1, appId: "appearance" },
     { ActionID: 111, text: "Date & Time", set: 1 },
     { ActionID: 112, text: "Extensions Manager", set: 1 },
     { ActionID: 113, text: "Monitors & Sound", set: 1 },
