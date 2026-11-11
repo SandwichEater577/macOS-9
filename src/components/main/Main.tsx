@@ -5,6 +5,7 @@ import AppleSystemProfiler from "./Windows/AppleSystemProfiler";
 import Calculator from "./Windows/Calculator";
 import Chooser from "./Windows/Chooser";
 import type { WindowState } from "../../Data/windowsData";
+import Appearance from "./Windows/ControllerPanels/Appearance.tsx";
 
 export default function Main({
   windows,
@@ -37,6 +38,7 @@ export default function Main({
             )}
             {windowState.id === "calculator" && <Calculator />}
             {windowState.id === "chooser" && <Chooser />}
+            {windowState.id === "appearance" && <Appearance />}
           </Window>
         );
       })}
