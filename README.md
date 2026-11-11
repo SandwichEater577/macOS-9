@@ -33,13 +33,28 @@ i also already had some experience making a web 'OS' ( recreated Windows 7 ). I 
 
 ## Screenshots
 
-![HomeScreen](public/Images/HomeScreen.png)
-![FirstMenu](public/Images/FirstMenu.png)
-![SecondMenu](public/Images/SecondMenu.png)
-![ThirdMenu](public/Images/ThirdMenu.png)
-![FourthMenu](public/Images/FourthMenu.png)
-![FifthMenu](public/Images/FifthMenu.png)
-![SixthMenu](public/Images/SixthMenu.png)
+<table>
+  <tr>
+    <td><img src="public/Images/HomeScreen.png" alt="Desktop" /></td>
+    <td><img src="public/Images/FirstMenu.png" alt="Apple menu" /></td>
+  </tr>
+  <tr>
+    <td><img src="public/Images/SecondMenu.png" alt="File menu" /></td>
+    <td><img src="public/Images/ThirdMenu.png" alt="Edit menu" /></td>
+  </tr>
+  <tr>
+    <td><img src="public/Images/FourthMenu.png" alt="View menu" /></td>
+    <td><img src="public/Images/FifthMenu.png" alt="Special menu" /></td>
+  </tr>
+  <tr>
+    <td><img src="public/Images/SixthMenu.png" alt="Help menu" /></td>
+    <td><img src="public/Images/ATC.png" alt="About This Computer window" /></td>
+  </tr>
+  <tr>
+    <td><img src="public/Images/ASP.png" alt="Apple System Profiler window" /></td>
+    <td><img src="public/Images/C.png" alt="Calculator window" /></td>
+  </tr>
+</table>
 
 ## How to run it
 
@@ -85,3 +100,4 @@ npm run build
 ## AI disclosure
 
 - Couldnt find good icons, asked DeepSeek to find icons used in Mac OS 9
+- Emotional support
